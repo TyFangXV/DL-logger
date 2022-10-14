@@ -1,18 +1,22 @@
 {
-  "name": "log",
-  "version": "1.0.0",
-  "description": "",
+  "name": "dl-logger",
+  "version": "0.1.5",
+  "description": "A lightweight logger for js application build on top of chalk.js",
   "main": "index.js",
   "scripts": {
     "build": "npx tsc -p .",
     "start": "node dist/src/index.js",
-    "test": "npm run build && npm run start"
+    "test": "npm run build && npm run start",
+    "npm": "cd dist && npm publish"
   },
   "keywords": [],
-  "author": "",
+  "author": "tyfangXV",
   "license": "ISC",
   "dependencies": {
     "chalk": "4.1.2",
     "moment-timezone": "^0.5.37"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
   }
 }
