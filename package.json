@@ -1,13 +1,20 @@
 {
   "name": "dl-logger",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "A lightweight logger for js application build on top of chalk.js",
-  "main": "index.js",
+  "main": "dist/src/index",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "npx tsc -p .",
     "start": "node dist/src/index.js",
     "test": "npm run build && npm run start",
-    "npm": "cd dist && npm publish"
+    "npm": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TyFangXV/DL-logger"
   },
   "keywords": [],
   "author": "tyfangXV",
