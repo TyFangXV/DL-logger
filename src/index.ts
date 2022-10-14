@@ -104,6 +104,20 @@ class DLogger {
             chalk.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`)
         ) 
     }
+
+
+    //throw an error
+    error(message:string)
+    {
+        const file_data = this.line_finder(new Error);
+
+        //Finding the message time
+        const time = moments().toLocaleString()
+        const error_time = new Date(time);
+        log(
+            chalk.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`)
+        ) 
+    }
 }
 
 export default DLogger;
