@@ -1,9 +1,9 @@
 {
   "name": "dl-logger",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A lightweight logger for js application build on top of chalk.js",
-  "main": "dist/src/index",
-  "types": "dist/src/logger.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],

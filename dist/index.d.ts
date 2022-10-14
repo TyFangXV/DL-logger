@@ -1,5 +1,3 @@
-///<reference types="typescript" />
-
 export declare class DLogger {
     path: string;
     time_zone: string;
