@@ -11,7 +11,7 @@
 * <b>Warning</b>
 
 ```js
-    logger.warn("Server us slowing down!!!!")
+    logger.warn("Server is slowing down!!!!")
 ```
 ![warning](https://github.com/TyFangXV/DL-logger/blob/main/view/warning.png?raw=true)
 
