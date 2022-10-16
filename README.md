@@ -1,6 +1,8 @@
 # How to use DL-logger
 
+
 ```js
+    //You can find the example for logger config file at https://github.com/TyFangXV/DL-logger/blob/main/test/logger.config.json 
     const { default: DLogger } = require("dl-logger");
     const logger = new DLogger(root_to_parent_folder);
 ```
