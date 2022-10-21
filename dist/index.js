@@ -60,38 +60,45 @@ class DLogger {
             process.exit();
         }
     }
-    line_finder(e) {
+    line_finder(e, split_int) {
         const regex = /\((.*):(\d+):(\d+)\)$/;
         const stack = e.stack;
-        const match = regex.exec(stack.split("\n")[2]);
+        const match = regex.exec(stack.split("\n")[split_int]);
+        log(match);
         return {
             filepath: match[1],
             line: match[2],
             column: match[3]
         };
     }
-    warn(message) {
-        const file_data = this.line_finder(new Error);
+    warn(error) {
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error === 'string' ? new Error() : error;
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
         //Finding the error time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`));
+        log(chalk_1.default.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]    ${typeof error === 'string' ? error : error.message}    @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`));
     }
     //show a message 
-    show(message) {
-        const file_data = this.line_finder(new Error);
+    show(error) {
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error === 'string' ? new Error() : error;
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
         //Finding the message time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`));
+        log(chalk_1.default.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${typeof error === 'string' ? error : error.message}    @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`));
     }
     //throw an error
-    error(message) {
-        const file_data = this.line_finder(new Error);
+    error(error) {
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error === 'string' ? new Error() : error;
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
         //Finding the message time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`));
+        log(chalk_1.default.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${typeof error === 'string' ? error : error.message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`));
     }
 }
 exports.DLogger = DLogger;

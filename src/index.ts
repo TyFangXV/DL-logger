@@ -68,11 +68,11 @@ export class DLogger {
     }
 
 
-    private line_finder(e:Error)
+    private line_finder(e:Error, split_int:1|2)
     {
         const regex = /\((.*):(\d+):(\d+)\)$/
         const stack = e.stack as string;
-        const match = regex.exec(stack.split("\n")[2]) as RegExpExecArray;
+        const match = regex.exec(stack.split("\n")[split_int]) as RegExpExecArray;
         return {
           filepath: match[1],
           line: match[2],
@@ -80,42 +80,48 @@ export class DLogger {
         };
     }
 
-    warn(message:string)
+    warn(error:Error | string)
     {
-        const file_data = this.line_finder(new Error);
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error  === 'string' ? new Error() : error; 
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
 
         //Finding the error time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
         log(
-            chalk.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`)
+            chalk.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]    ${typeof error === 'string' ? error : error.message}    @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`)
         )
     }
 
     //show a message 
-    show(message:string)
+    show(error:Error | string)
     {
-        const file_data = this.line_finder(new Error);
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error  === 'string' ? new Error() : error; 
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
 
         //Finding the message time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
         log(
-            chalk.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`)
+            chalk.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${typeof error === 'string' ? error : error.message}    @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`)
         ) 
     }
 
 
     //throw an error
-    error(message:string)
+    error(error:Error | string)
     {
-        const file_data = this.line_finder(new Error);
+        const is_runtime_error_custom = typeof error === typeof new Error() ? true : false;
+        const runtime_error = typeof error  === 'string' ? new Error() : error; 
+        const file_data = this.line_finder(runtime_error, is_runtime_error_custom ? 1 : 2);
 
         //Finding the message time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
         log(
-            chalk.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`)
+            chalk.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${typeof error === 'string' ? error : error.message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`)
         ) 
     }
 }
