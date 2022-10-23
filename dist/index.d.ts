@@ -4,7 +4,7 @@ export declare class DLogger {
     constructor(path: string);
     private line_finder;
     warn(message: string): void;
-    show(message: string): void;
+    show(message: string | object): void;
     error(message: string): void;
 }
 export default DLogger;

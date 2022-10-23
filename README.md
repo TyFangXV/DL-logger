@@ -7,6 +7,8 @@
     const logger = new DLogger(root_to_parent_folder);
 ```
 
+<b>The logger supports both string and object</b>
+
 ## Types of command
 <br>
 
@@ -14,6 +16,7 @@
 
 ```js
     logger.warn("Server is slowing down!!!!")
+    logger.warn({message : "SERVER IS SLOWING DOWN!!"});
 ```
 ![warning](https://github.com/TyFangXV/DL-logger/blob/main/view/warning.png?raw=true)
 
@@ -23,7 +26,8 @@
 * <b>Message</b>
 
 ```js
-    logger.show("Cool message")
+    logger.show("Cool message");
+    log.show({message : "cool Message"})
 ```
 ![msg](https://github.com/TyFangXV/DL-logger/blob/main/view/show.png?raw=true)
 
@@ -32,6 +36,7 @@
 * <b>Error</b>
 
 ```js
-    logger.error("SERVER IS DOWN!!")
+    logger.error("SERVER IS DOWN!!");
+    log.error({message : "SERVER IS DOWN!!"});
 ```
 ![err](https://github.com/TyFangXV/DL-logger/blob/main//view/error.png?raw=true)

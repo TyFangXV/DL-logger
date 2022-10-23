@@ -87,21 +87,23 @@ export class DLogger {
         //Finding the error time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
         log(
-            chalk.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`)
+            chalk.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`)
         )
     }
 
     //show a message 
-    show(message:string)
+    show(message:string | object)
     {
         const file_data = this.line_finder(new Error);
 
         //Finding the message time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
         log(
-            chalk.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`)
+            chalk.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`)
         ) 
     }
 
@@ -114,8 +116,9 @@ export class DLogger {
         //Finding the message time
         const time = moments().toLocaleString()
         const error_time = new Date(time);
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
         log(
-            chalk.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`)
+            chalk.bold.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`)
         ) 
     }
 }

@@ -75,7 +75,8 @@ class DLogger {
         //Finding the error time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`));
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
+        log(chalk_1.default.red.bold.bgYellowBright(`⚠️   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column} ⚠️`));
     }
     //show a message 
     show(message) {
@@ -83,7 +84,8 @@ class DLogger {
         //Finding the message time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`));
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
+        log(chalk_1.default.white.bold.bgGreenBright(`💭   [${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}   💭`));
     }
     //throw an error
     error(message) {
@@ -91,7 +93,8 @@ class DLogger {
         //Finding the message time
         const time = (0, moment_timezone_1.default)().toLocaleString();
         const error_time = new Date(time);
-        log(chalk_1.default.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${message}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`));
+        const text = typeof message === "object" ? JSON.stringify(message) : message;
+        log(chalk_1.default.bold.red.bgRedBright(`[${error_time.toLocaleDateString()}:${error_time.toLocaleTimeString()}]     ${text}     @${file_data.filepath.split("\\").pop()}:${file_data.line}-${file_data.column}`));
     }
 }
 exports.DLogger = DLogger;

@@ -1,6 +1,6 @@
 {
   "name": "dl-logger",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A lightweight logger for js application build on top of chalk.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "npx tsc -p .",
+    "build": "del /S dist* && npx tsc -p .",
     "start": "node dist/src/index.js",
     "test": "npm run build && npm run start",
     "npm": "npm publish"
